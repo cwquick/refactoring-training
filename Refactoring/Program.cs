@@ -19,5 +19,26 @@ namespace Refactoring
 
             Tusc.Start(users, products);
         }
+
+        public static void SaveAndClose(User currentUser, List<Product> products)
+        {
+            currentUser.SaveUser();
+            SaveProducts(products);
+
+            UI.promptForClose();
+            return;
+        }
+
+        public static void SaveUsers(List<User> users)
+        {
+            string json = JsonConvert.SerializeObject(users, Formatting.Indented);
+            File.WriteAllText(@"Data\Users.json", json);
+        }
+
+        public static void SaveProducts(List<Product> products)
+        {
+            string json = JsonConvert.SerializeObject(products, Formatting.Indented);
+            File.WriteAllText(@"Data\Products.json", json);
+        }
     }
 }
